@@ -11,6 +11,25 @@
 |
 */
 
+// routes voor image uploader
+Route::get('/image/upload', 'ImageUploadController@index');
+Route::post('/image/upload', 'ImageUploadController@store')->name('postUpload');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/sendtestmail', 'MailTestController@sendMail', function () {
+
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// Payment routes
+Route::get('stripe', 'PaymentController@getStripeForm');
+Route::post('stripe', 'PaymentController@postStripePayment')->name('stripe.post');
+
+// API routes
+Route::post('/api/convert', 'APIController@postConvert')->name('api.convert');
