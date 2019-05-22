@@ -15,6 +15,16 @@ class CreateRewardsTable extends Migration
     {
         Schema::create('rewards', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->bigInteger('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+
+            $table->string('name')->required;
+
+            $table->char('price')->required;
+
+            $table->text('description')->required;
+
             $table->timestamps();
         });
     }

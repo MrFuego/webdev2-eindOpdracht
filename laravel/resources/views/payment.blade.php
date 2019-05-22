@@ -13,6 +13,9 @@
     </script>
 </head>
 <body>
+
+    @include('partials/header')
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -72,6 +75,9 @@
             </div>
         </div>
     </div>
+
+    @include('partials/footer')
+
     <script>
         let convertUrl = '{{ route('api.convert')}}';
     </script>

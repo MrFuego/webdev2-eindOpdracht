@@ -17,7 +17,7 @@ Route::post('/addProject', 'ProjectUploadController@store')->name('projectUpload
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::get('/sendtestmail', 'MailTestController@sendMail', function () {
 
@@ -28,8 +28,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Payment routes
-Route::get('stripe', 'PaymentController@getStripeForm');
-Route::post('stripe', 'PaymentController@postStripePayment')->name('stripe.post');
+Route::get('/stripe', 'PaymentController@getStripeForm');
+Route::post('/stripe', 'PaymentController@postStripePayment')->name('stripe.post');
 
 // API routes
 Route::post('/api/convert', 'APIController@postConvert')->name('api.convert');

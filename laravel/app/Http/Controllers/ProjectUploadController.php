@@ -7,10 +7,17 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Project;
 
 class ProjectUploadController extends Controller
 {
     public function index() {
+
+        //VOORBEELD OM DINGEN UIT DATABASE TE HALEN
+//        $project = Project::where('id', 1)->first();
+
+//       dd($project->images);
+
 
         $images = Image::all();
 
