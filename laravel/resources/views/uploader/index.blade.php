@@ -24,7 +24,7 @@
 
     <div class="columns is-desktop">
         <div class="column">
-            <form action="{{route('postUpload')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('projectUpload')}}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" id="amountOfImages" name="amountOfImages" value="{{ old('amountOfImages', 1) }}">

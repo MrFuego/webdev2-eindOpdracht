@@ -12,8 +12,8 @@
 */
 
 // routes voor image uploader
-Route::get('/image/upload', 'ImageUploadController@index');
-Route::post('/image/upload', 'ImageUploadController@store')->name('postUpload');
+Route::get('/addProject', 'ProjectUploadController@index');
+Route::post('/addProject', 'ProjectUploadController@store')->name('projectUpload');
 
 Route::get('/', function () {
     return view('welcome');

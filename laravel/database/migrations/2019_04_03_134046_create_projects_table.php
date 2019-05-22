@@ -16,7 +16,16 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('name')->required;
+            $table->string('project_name')->required;
+
+            $table->longText('project_description')->required;
+
+            $table->dateTime('final_date')->required;
+
+            $table->char('goal')->required;
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

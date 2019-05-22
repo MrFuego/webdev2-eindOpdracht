@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class ImageUploadController extends Controller
+class ProjectUploadController extends Controller
 {
     public function index() {
 

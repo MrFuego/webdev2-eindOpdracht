@@ -15,6 +15,18 @@ class CreatePledgesTable extends Migration
     {
         Schema::create('pledges', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->bigInteger('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+
+            $table->char('pledge')->required;
+
+            $table->bigInteger('reward_id')->unsigned();
+            $table->foreign('reward_id')->references('id')->on('rewards');
+
             $table->timestamps();
         });
     }
