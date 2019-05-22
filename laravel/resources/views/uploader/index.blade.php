@@ -1,6 +1,8 @@
 
 @extends('layout')
 
+@section('title', 'buy credits')
+
 @section('content')
 
 
