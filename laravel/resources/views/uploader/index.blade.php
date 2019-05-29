@@ -1,7 +1,7 @@
 
 @extends('layout')
 
-@section('title', 'buy credits')
+@section('title', 'add project')
 
 @section('content')
 
@@ -11,7 +11,7 @@
 
     <div class="columns is-desktop">
         <div class="column">
-            <h1 class="title">Image Upload</h1>
+            <h1 class="title">Project uploader</h1>
         </div>
     </div>
 
@@ -27,13 +27,32 @@
     <div class="columns is-desktop">
         <div class="column">
             <form action="{{route('projectUpload')}}" method="post" enctype="multipart/form-data">
+
                 @csrf
 
                 <input type="hidden" id="amountOfImages" name="amountOfImages" value="{{ old('amountOfImages', 1) }}">
 
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" name="project_id" placeholder="@lang('labels.project_id')">
+                        <input class="input" type="text" name="project_name" placeholder="Mijn waanzinnig project">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="textfield" name="project_description" placeholder="Mijn epische uitleg over mijn project">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                            <input class="input" name="final_date" type="date">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                            <input class="input" name="goal" type="number" placeholder='1000'>
                     </div>
                 </div>
 
@@ -86,11 +105,11 @@
 
     <div class="columns">
 
-    @foreach($images as $image)
+    {{-- @foreach($images as $image)
     <div class="column is-one-quarter">
         <img src="{{ asset($image->filepath . '/' . $image->filename) }}" alt="{{ $image->title }}" style="width: 100%;">
     </div>
-    @endforeach
+    @endforeach --}}
 
 
     </div>

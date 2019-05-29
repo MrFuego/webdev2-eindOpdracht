@@ -13,8 +13,13 @@ class HomepageController extends Controller
     {
 
         $projects = Project::all();
+        foreach($projects as $project){
+            $project->daysToGo = Project::calculateDaysToGo($project->final_date);
+        }
 
         return view('welcome')->with(compact('projects'));
 
     }
+
+
 }

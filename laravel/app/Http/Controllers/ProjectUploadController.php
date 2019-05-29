@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectUploadController extends Controller
 {
@@ -27,7 +29,10 @@ class ProjectUploadController extends Controller
     public function store(Request $request) {
 
         $rules = [
-            'project_id'    => 'required|numeric',
+            'project_name'          => 'required',
+            'project_description'   => 'required',
+            'final_date'            => 'required',
+            'goal'                  => 'required|numeric',
             'file'          => 'required',
             'file.*'        => 'image|mimes:jpeg,png,gif,svg,jpg|max:2048',
         ];
@@ -44,32 +49,57 @@ class ProjectUploadController extends Controller
                     'message' => 'something went wrong!'
                     ]
                 );
-        }
+        } else{
 
-        if($request->hasFile('file')) {
+            $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_description, $request->final_date, $request->goal );
 
-            // folder van de afbeeldig(en)
-            $directory = '/project-' . $request->project_id;
+            $project = DB::table('projects')->latest()->first();
 
-            foreach($request->file('file') as $image) {
+            if($request->hasFile('file')) {
 
-                $name = $image->getClientOriginalName();
-                $extension = $image->getClientOriginalExtension();
+                // folder van de afbeeldig(en)
+                $directory = '/project-' . $project_id;
 
-                $filename = pathinfo($name, PATHINFO_FILENAME) . '-' . uniqid(5) . '.' . $extension;
+                foreach($request->file('file') as $image) {
 
-                $image->storeAs($directory, $filename, 'public');
+                    $name = $image->getClientOriginalName();
+                    $extension = $image->getClientOriginalExtension();
 
-                $this->storeImageToDatabase($request->project_id, $filename, 'storage' . $directory);
+                    $filename = pathinfo($name, PATHINFO_FILENAME) . '-' . uniqid(5) . '.' . $extension;
 
+                    $image->storeAs($directory, $filename, 'public');
+
+                    $this->storeImageToDatabase($project_id, $filename, 'storage' . $directory);
+
+                }
+
+                return back()->with([
+                    'notification' => 'success',
+                    'message' => 'Het project is succesvol opgeladen'
+                ]);
             }
-
-            return back()->with([
-                'notification' => 'success',
-                'message' => 'De afbeeldingen zijn succesvol opgeladen'
-            ]);
         }
     }
+
+
+    private function storeProjectToDatabase( $project_name, $project_description, $final_date, $goal ) {
+
+        $project = new Project();
+
+        $project->project_name = $project_name;
+        $project->project_description = $project_description;
+        $project->final_date = $final_date;
+        $project->goal = $goal;
+        $project->user_id = 1;
+
+
+        $project->save();
+
+        $id = $project->id;
+        return $id;
+
+    }
+
 
     private function storeImageToDatabase( $project_id, $filename, $filepath ) {
 

@@ -1,45 +1,72 @@
-<!-- Start Top Bar -->
-<div class="top-bar">
-    <div class="row">
-        <div class="top-bar-left">
-            <ul class="menu" role="menubar">
-                <li class="@if(Route::is('index')) is-active @endif" role="menuitem">
-                  <a href="{{ route('index') }}">
-                    Home
-                  </a>
-                </li>
-                <li class="@if(Route::is('stripe.post')) is-active @endif" role="menuitem">
-                  <a href="{{ route('stripe.post') }}">
-                    Credits kopen
-                  </a>
-                </li>
-                <li class="@if(Route::is('login')) is-active @endif" role="menuitem">
-                  <a href="{{ route('login') }}">
+<header>
+    <nav>
+        <ul class="menu" role="menubar">
+            <li class="@if(Route::is('index')) is-active @endif" role="menuitem">
+            <a href="{{ route('index') }}">
+                Home
+            </a>
+            </li>
+            @if(Auth::check())
+            <li class="@if(Route::is('stripe.post')) is-active @endif" role="menuitem">
+            <a href="{{ route('stripe.post') }}">
+                Credits kopen
+            </a>
+            </li>
+            <li class="@if(Route::is('profile')) is-active @endif" role="menuitem">
+                <a href="{{ route('profile') }}">
+                    Profile
+                </a>
+            </li>
+
+            <li class="@if(Route::is('project.add')) is-active @endif" role="menuitem">
+                <a href="{{ route('project.add') }}">
+                    Start een campagne
+                </a>
+            </li>
+            <li role="menuitem">
+                <a href="{{ route('project.add') }}">
+                    Logout
+                </a>
+            </li>
+
+            @else
+            <li class="@if(Route::is('login')) is-active @endif" role="menuitem">
+                <a href="{{ route('login') }}">
                     Login
-                  </a>
+                </a>
+            </li>
+
+            @endif
+
+            <!-- Authentication Links -->
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
-                <li class="@if(Route::is('profile')) is-active @endif" role="menuitem">
-                    <a href="{{ route('profile') }}">
-                        Profile
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </li>
-                <li class="@if(Route::is('about')) is-active @endif" role="menuitem">
-                    <a href="{{ route('about') }}">
-                        About
-                    </a>
-                </li>
-                <li class="@if(Route::is('contact')) is-active @endif" role="menuitem">
-                    <a href="{{ route('contact') }}">
-                        Contact
-                    </a>
-                </li>
-                <li class="@if(Route::is('privacy')) is-active @endif" role="menuitem">
-                    <a href="{{ route('privacy') }}">
-                        Privacy
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- End Top Bar -->
+            @endguest
+        </ul>
+    </nav>
+</header>
