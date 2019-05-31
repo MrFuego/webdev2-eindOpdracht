@@ -6,7 +6,6 @@
 @section('content')
 
 
-
 <div class="container">
 
     <div class="columns is-desktop">
@@ -26,7 +25,7 @@
 
     <div class="columns is-desktop">
         <div class="column">
-            <form action="{{route('projectUpload')}}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('projectUpload') }}" method="post" enctype="multipart/form-data">
 
                 @csrf
 
@@ -40,7 +39,13 @@
 
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="textfield" name="project_description" placeholder="Mijn epische uitleg over mijn project">
+                        <input class="input" type="textfield" name="project_intro" placeholder="Mijn korte uitleg over mijn project">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="textfield" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project">
                     </div>
                 </div>
 
@@ -53,6 +58,18 @@
                 <div class="field">
                     <div class="control">
                             <input class="input" name="goal" type="number" placeholder='1000'>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <select name="project_category">
+                            <option value="" disabled selected>Kies een categorie</option>
+                            <option value="1">Sport</option>
+                            <option value="2">Gaming</option>
+                            <option value="3">Food</option>
+                            <option value="4">Elektronica</option>
+                        </select>
                     </div>
                 </div>
 
@@ -70,6 +87,19 @@
                         </tr>
                     </tbody>
                 </table>
+
+                hier komt de optie om rewards toe te voegen
+                <br>
+                -naam/titel van de perk
+                <br>
+                -prijs van de perk
+                <br>
+                -Wat krijg je bij deze perk
+                <br>
+                (-max aantal beschikbaar)
+                <br><br><br>
+
+
                 <table style="display: none;">
                     <tbody id="clone">
                         <tr>

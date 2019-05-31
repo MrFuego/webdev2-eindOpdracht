@@ -11,6 +11,14 @@ class Project extends Model
         return $this->hasMany('App\Models\Image');
     }
 
+    public function rewards() {
+        return $this->hasMany('App\Models\Reward');
+    }
+
+    public function pledges() {
+        return $this->hasMany('App\Models\Pledge');
+    }
+
     public static function calculateDaysToGo($date)
     {
         $datetime1 = new DateTime(date("Y-m-d"));
@@ -18,5 +26,14 @@ class Project extends Model
         $interval = ($datetime1->diff($datetime2))->format('%a');
 
         return $interval;
+    }
+
+    public static function calculateSumOfPledges($pledges)
+    {
+        $totalPledges = 0;
+        foreach ($pledges as $pledge){
+            $totalPledges += $pledge['pledge'];
+        }
+        return $totalPledges;
     }
 }
