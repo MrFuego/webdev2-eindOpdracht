@@ -6,6 +6,16 @@
                 Home
             </a>
             </li>
+            <li class="@if(Route::is('projects')) is-active @endif" role="menuitem">
+                <a href="{{ route('projects') }}">
+                    Projecten
+                </a>
+            </li>
+            <li class="@if(Route::is('news')) is-active @endif" role="menuitem">
+                <a href="{{ route('news') }}">
+                    Nieuws
+                </a>
+            </li>
             @if(Auth::check())
             <li class="@if(Route::is('stripe.post')) is-active @endif" role="menuitem">
             <a href="{{ route('stripe.post') }}">

@@ -25,7 +25,7 @@
 
     <div class="columns is-desktop">
         <div class="column">
-            <form action="{{ route('projectUpload') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('project.upload') }}" method="post" enctype="multipart/form-data">
 
                 @csrf
 

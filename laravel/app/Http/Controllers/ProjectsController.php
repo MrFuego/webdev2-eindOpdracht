@@ -7,12 +7,12 @@ use App\Models\Project;
 use App\Models\Image;
 use App\Models\Pledge;
 
-class HomepageController extends Controller
+class ProjectsController extends Controller
 {
-    public function home()
+    public function projects()
     {
 
-        $projects = Project::all()->where('uitgelicht', '1')->random(4);
+        $projects = Project::all();
 
         foreach($projects as $project){
 
@@ -29,8 +29,15 @@ class HomepageController extends Controller
             $project->totalBackers = count(Pledge::all()->where('project_id', $project->id)->groupBy('user_id'));
         }
 
-        return view('index')->with(compact('projects'), compact('news'));
+        return view('projects')->with(compact('projects'));
+
     }
 
+    public function getProject($project_id)
+    {
+        $projects = Project::all()->where('id', $project_id);
+
+        return view('singleProject')->with(compact('projects'));
+    }
 
 }

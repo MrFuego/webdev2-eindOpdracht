@@ -16,7 +16,12 @@ Route::get('/', 'HomepageController@home')->name('index');
 Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/privacy', 'PagesController@privacy')->name('privacy');
-Route::get('project/{project_id}', 'ProjectsController@show')->name('showProject');
+
+// routes om de prrojecten op te vragen
+Route::get('/projects', 'ProjectsController@projects')->name('projects');
+Route::get('/projects/{project_id}', 'ProjectsController@getProject');
+
+Route::get('/news', 'NewspageController@news')->name('news');
 
 
 Route::get('/profile', function () {
@@ -26,7 +31,7 @@ Route::get('/profile', function () {
 
 // routes voor project uploader
 Route::get('/addProject', 'ProjectUploadController@index')->name('project.add');
-Route::post('/addProject', 'ProjectUploadController@store')->name('projectUpload');
+Route::post('/addProject', 'ProjectUploadController@store')->name('project.upload');
 
 
 // route om een testmail te sturen

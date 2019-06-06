@@ -36,4 +36,13 @@ class Project extends Model
         }
         return $totalPledges;
     }
+
+    public static function calculateDonationProgress($goal, $allPledges)
+    {
+
+        $progress = $allPledges / $goal * 100;
+        return round($progress, 2);
+    }
+
+
 }

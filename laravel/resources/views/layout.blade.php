@@ -29,13 +29,15 @@
 
         @include('partials/header')
 
-        @yield('front-page-content')
+        <section class="section">
+            <div class="container is-widescreen">
+                <div class="columns is-multiline is-variable is-2">
 
-        <div class="section">
+                    @yield('content')
 
-            @yield('content')
-
-        </div>
+                </div>
+            </div>
+        </section>
 
         @include('partials/footer')
         @include('partials/scripts')

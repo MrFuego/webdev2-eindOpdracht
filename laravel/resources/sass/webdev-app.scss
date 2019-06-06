@@ -7,20 +7,72 @@
 // Bulma
 @import '~bulma/bulma';
 
-
-body{
-    .section{
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-        clear: both;
-        background-color: $green;
-        display: flex;
-        flex-wrap: wrap;
+.column{
+    .box{
+        padding: 0;
+        border-radius: 0;
+        box-shadow: 1px 1px 4px rgba($black, 0.15);
+        .image-project{
+            width: 100%;
+            padding-top: 75%;
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: cover;
+        }
+        .project-info{
+            padding: 0.5rem;
+            h1{
+                margin-bottom: 0.5rem;
+            }
+            p{
+                font-size: 0.75rem;
+            }
+            p.intro{
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                height: 4.5rem;
+                overflow:hidden;
+            }
+            .progress, .level{
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
-.project-container, .project-container-first{
+.project-container-uitgelicht{
+    .box{
+        .project-info{
+            padding: 0.5rem;
+            h1{
+                margin-bottom: 0.5rem;
+            }
+            p{
+                font-size: 1rem;
+            }
+            p.intro{
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+                height: 4rem;
+                overflow:hidden;
+            }
+            .progress, .level{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.container.is-widescreen {
+    max-width: 1152px;
+}
+.container.is-fullhd {
+    max-width: 1344px;
+}
+
+
+/*
+.project-container, .project-container-uitgelicht{
     width: 49.5%;
     height: 400px;
     background-color: $brown;
@@ -34,7 +86,7 @@ body{
         margin-right: 1%;
     }
 
-    .project-info{
+    .project-info-test{
         background-color: rgba( $white, .5 );
         float: right;
         margin-top: 150px;
@@ -60,7 +112,7 @@ body{
     }
 }
 
-.project-container-first{
+.project-container-uitgelicht-test{
     width: 100%;
     height: 80vh;
     .project-info{
@@ -112,4 +164,4 @@ header{
             }
         }
     }
-}
+} */
