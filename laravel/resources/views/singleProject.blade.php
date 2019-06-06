@@ -7,17 +7,17 @@
 
     <div class="column is-full">
         <div class="box">
-            <div class="image-project has-background-light" style="background-image: url('{{ asset($project[0]->images->first()['filepath'])  . '/' . $project[0]->images->first()['filename'] }}')"></div>
+
             <section class="project-info">
-                <h1 class="title is-5 is-spaced"> {{ $project[0]->project_name }} </h1>
+                <h1 class="title is-5 is-spaced"> {{ $project->first()['project_name'] }} </h1>
                 <p class="intro">
-                    {{ $project[0]->project_description }}
+                    {{ $project->first()['project_description'] }}
                 </p>
                 <div class="level">
                     <div class="level-left">
                         <p>
                             <strong>
-                                {{ $project[0]->allPledges }}
+                                {{ $project->allPledges }}
                             </strong>
                             credits gedoneerd
                         </p>
@@ -25,17 +25,17 @@
                     <div class="level-right">
                         <p>
                             <strong>
-                                {{ $project[0]->daysToGo }}
+                                {{ $project->daysToGo }}
                             </strong>
                             dagen te gaan
                         </p>
                     </div>
                 </div>
-                <progress class="progress is-info" value="{{ $project[0]->progress }}" max="100">45%</progress>
+                <progress class="progress is-info" value="{{ $project->progress }}" max="100">45%</progress>
                 <div class="level-right">
                     <p>
                         <strong>
-                            {{ $project[0]->totalBackers }}
+                            {{ $project->totalBackers }}
                         </strong>
                         backers
                     </p>

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Project;
-use App\Models\Image;
 use App\Models\Pledge;
+use App\Models\Image;
 
 class ProjectsController extends Controller
 {
@@ -35,19 +34,29 @@ class ProjectsController extends Controller
 
     public function getProject($project_id)
     {
-        $project = Project::all()->where('id', $project_id);
+        $project = Project::where('id', $project_id);
 
         // calculates how much days untill the project ends
-        $project[0]->daysToGo = Project::calculateDaysToGo($project[0]->final_date);
+        $project->daysToGo = Project::calculateDaysToGo($project->first()['final_date']);
+
 
         // calculates the total sum of all the pledges
-        $project[0]->allPledges = Project::calculateSumOfPledges($project[0]->pledges);
+        $project->allPledges = Project::calculateSumOfPledges($project->first()['pledges']);
 
         // calculates the total progress of all the pledges
-        $project[0]->progress = Project::calculateDonationProgress($project[0]->goal, $project[0]->allPledges);
+        $project->progress = Project::calculateDonationProgress($project->first()['goal'], $project->first()['allPledges']);
 
         // counts the amount of unique backers
-        $project[0]->totalBackers = count(Pledge::all()->where('project_id', $project[0]->id)->groupBy('user_id'));
+        $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
+
+        $project->images = Image::where('project_id', $project_id);
+
+        dd($project->images);
+
+        foreach ($project->images as $image)
+        {
+            echo 'test';
+        }
 
         return view('singleProject')->with(compact('project'));
     }
