@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
-use App\Models\Image;
 use App\Models\Pledge;
+use App\Models\News;
 
 class HomepageController extends Controller
 {
@@ -13,6 +13,8 @@ class HomepageController extends Controller
     {
 
         $projects = Project::all()->where('uitgelicht', '1')->random(4);
+
+        $news = News::orderBy('created_at', 'desc')->take(3)->get();
 
         foreach($projects as $project){
 
@@ -29,7 +31,7 @@ class HomepageController extends Controller
             $project->totalBackers = count(Pledge::all()->where('project_id', $project->id)->groupBy('user_id'));
         }
 
-        return view('index')->with(compact('projects'), compact('news'));
+        return view('index')->with(compact('projects', 'news'));
     }
 
 

@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ProjectUploadController extends Controller
 {
@@ -52,8 +50,6 @@ class ProjectUploadController extends Controller
         } else{
 
             $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_description, $request->final_date, $request->goal );
-
-            $project = DB::table('projects')->latest()->first();
 
             if($request->hasFile('file')) {
 

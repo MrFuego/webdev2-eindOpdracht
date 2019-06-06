@@ -10757,6 +10757,29 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+.intro-text {
+  margin-bottom: 10rem;
+}
+
+.intro-text h2 {
+  line-height: 3.5rem;
+}
+
+.navbar .is-full-width {
+  max-width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .navbar {
+    padding: 0;
+  }
+
+  .navbar .is-full-width {
+    padding: 0;
+    max-width: 100%;
+  }
+}
+
 .column .box {
   padding: 0;
   border-radius: 0;

@@ -35,9 +35,21 @@ class ProjectsController extends Controller
 
     public function getProject($project_id)
     {
-        $projects = Project::all()->where('id', $project_id);
+        $project = Project::all()->where('id', $project_id);
 
-        return view('singleProject')->with(compact('projects'));
+        // calculates how much days untill the project ends
+        $project[0]->daysToGo = Project::calculateDaysToGo($project[0]->final_date);
+
+        // calculates the total sum of all the pledges
+        $project[0]->allPledges = Project::calculateSumOfPledges($project[0]->pledges);
+
+        // calculates the total progress of all the pledges
+        $project[0]->progress = Project::calculateDonationProgress($project[0]->goal, $project[0]->allPledges);
+
+        // counts the amount of unique backers
+        $project[0]->totalBackers = count(Pledge::all()->where('project_id', $project[0]->id)->groupBy('user_id'));
+
+        return view('singleProject')->with(compact('project'));
     }
 
 }

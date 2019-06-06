@@ -22,6 +22,7 @@ Route::get('/projects', 'ProjectsController@projects')->name('projects');
 Route::get('/projects/{project_id}', 'ProjectsController@getProject');
 
 Route::get('/news', 'NewspageController@news')->name('news');
+Route::get('/news/{news_id}', 'NewspageController@getNews');
 
 
 Route::get('/profile', function () {

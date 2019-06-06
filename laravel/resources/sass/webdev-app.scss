@@ -7,6 +7,34 @@
 // Bulma
 @import '~bulma/bulma';
 
+
+
+.intro-text{
+    margin-bottom: 10rem;
+    h2{
+        line-height: 3.5rem;
+    }
+}
+
+.navbar{
+    .is-full-width{
+        max-width:100%;
+    }
+}
+
+@media (max-width: 1023px){
+    .navbar{
+        padding: 0;
+        .is-full-width{
+            padding: 0;
+            max-width:100%;
+        }
+    }
+}
+
+
+
+
 .column{
     .box{
         padding: 0;
