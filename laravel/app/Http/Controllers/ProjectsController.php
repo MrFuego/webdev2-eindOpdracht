@@ -49,14 +49,7 @@ class ProjectsController extends Controller
         // counts the amount of unique backers
         $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
 
-        $project->images = Image::where('project_id', $project_id);
-
-        dd($project->images);
-
-        foreach ($project->images as $image)
-        {
-            echo 'test';
-        }
+        $project->images = Image::all()->where('project_id', $project_id);
 
         return view('singleProject')->with(compact('project'));
     }

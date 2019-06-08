@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
+use App\Models\Category;
 
 class ProjectUploadController extends Controller
 {
@@ -18,10 +19,9 @@ class ProjectUploadController extends Controller
 
 //       dd($project->images);
 
+        $categories = Category::all();
 
-        $images = Image::all();
-
-        return view('uploader.index')->with(compact('images'));
+        return view('uploader.index')->with(compact('categories'));
     }
 
     public function store(Request $request) {

@@ -8,6 +8,30 @@
 @import '~bulma/bulma';
 
 
+.project_form{
+    width:100%;
+    .image-project{
+        width: 100%;
+        padding-top: 75%;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+    }
+    .columns{
+        .column{
+            h2{
+                margin-bottom: 0.5rem;
+            }
+            .field{
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+}
+
+.button.is-primary{
+    background-color: #00d1b2;
+}
 
 .intro-text{
     margin: 10rem 0;
