@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Pledge;
 use App\Models\Image;
+use App\Models\Reward;
 
 class ProjectsController extends Controller
 {
@@ -50,6 +51,8 @@ class ProjectsController extends Controller
         $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
 
         $project->images = Image::all()->where('project_id', $project_id);
+
+        $project->rewards = Reward::all()->where('project_id', $project_id);
 
         return view('singleProject')->with(compact('project'));
     }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
 use App\Models\Category;
+use App\Models\Reward;
 
 class ProjectUploadController extends Controller
 {
@@ -28,11 +29,13 @@ class ProjectUploadController extends Controller
 
         $rules = [
             'project_name'          => 'required',
+            'project_intro'         => 'required',
             'project_description'   => 'required',
             'final_date'            => 'required',
             'goal'                  => 'required|numeric',
-            'file'          => 'required',
-            'file.*'        => 'image|mimes:jpeg,png,gif,svg,jpg|max:2048',
+            'project_category'      => 'required|numeric',
+            'file'                  => 'required',
+            'file.*'                => 'image|mimes:jpeg,png,gif,svg,jpg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -49,7 +52,14 @@ class ProjectUploadController extends Controller
                 );
         } else{
 
-            $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_description, $request->final_date, $request->goal );
+            $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_intro, $request->project_description, $request->final_date, $request->goal, $request->project_category );
+
+
+            if($request->perk_title !== 'empty'){
+                for( $i = 0 ; $i < $request->amountOfPerks ; $i++){
+                    $this->storeRewardToDatabase( $project_id, $request->perk_title[$i], $request->perk_price[$i], $request->perk_description[$i]);
+                }
+            }
 
             if($request->hasFile('file')) {
 
@@ -69,23 +79,26 @@ class ProjectUploadController extends Controller
 
                 }
 
-                return back()->with([
-                    'notification' => 'success',
-                    'message' => 'Het project is succesvol opgeladen'
-                ]);
+
             }
+            return back()->with([
+                'notification' => 'success',
+                'message' => 'Het project is succesvol opgeladen'
+            ]);
         }
     }
 
 
-    private function storeProjectToDatabase( $project_name, $project_description, $final_date, $goal ) {
+    private function storeProjectToDatabase( $project_name, $project_intro, $project_description, $final_date, $goal, $project_category ) {
 
         $project = new Project();
 
         $project->project_name = $project_name;
+        $project->project_intro = $project_intro;
         $project->project_description = $project_description;
         $project->final_date = $final_date;
         $project->goal = $goal;
+        $project->category = $project_category;
         $project->user_id = 1;
 
 
@@ -106,6 +119,19 @@ class ProjectUploadController extends Controller
         $image->filepath = $filepath;
 
         $image->save();
+
+    }
+
+    private function storeRewardToDatabase( $project_id, $name, $price, $description ) {
+
+        $reward = new Reward();
+
+        $reward->project_id = $project_id;
+        $reward->name = $name;
+        $reward->price = $price;
+        $reward->description = $description;
+
+        $reward->save();
 
     }
 }

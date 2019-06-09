@@ -10757,26 +10757,6 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
-.project_form {
-  width: 100%;
-}
-
-.project_form .image-project {
-  width: 100%;
-  padding-top: 75%;
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-}
-
-.project_form .columns .column h2 {
-  margin-bottom: 0.5rem;
-}
-
-.project_form .columns .column .field {
-  margin-bottom: 1.5rem;
-}
-
 .button.is-primary {
   background-color: #00d1b2;
 }
@@ -10802,6 +10782,44 @@ label.panel-block:hover {
     padding: 0;
     max-width: 100%;
   }
+}
+
+.column.project_explenation h1,
+.column.project_explenation h2,
+.column.project_explenation h3,
+.column.project_explenation h4,
+.column.project_explenation h5,
+.column.project_explenation h6 {
+  font-weight: bold;
+}
+
+.column.project_explenation h1 {
+  font-size: 2rem;
+}
+
+.column.project_explenation h2 {
+  font-size: 1.75rem;
+}
+
+.column.project_explenation h3 {
+  font-size: 1.5rem;
+}
+
+.column.project_explenation h4 {
+  font-size: 1.25rem;
+}
+
+.column.project_explenation h5,
+.column.project_explenation h6 {
+  font-size: 1rem;
+}
+
+.column.project_explenation p {
+  margin-bottom: 2rem;
+}
+
+.column .box.box-reward {
+  padding: 1rem;
 }
 
 .column .box {
@@ -10840,6 +10858,14 @@ label.panel-block:hover {
 .column .box .project-info .progress,
 .column .box .project-info .level {
   margin-bottom: 0;
+}
+
+.column .project_form h2 {
+  margin-bottom: 0.5rem;
+}
+
+.column .project_form .field {
+  margin-bottom: 1.5rem;
 }
 
 .project-container-uitgelicht .box .project-info {

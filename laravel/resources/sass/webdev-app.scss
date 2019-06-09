@@ -8,27 +8,6 @@
 @import '~bulma/bulma';
 
 
-.project_form{
-    width:100%;
-    .image-project{
-        width: 100%;
-        padding-top: 75%;
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-    }
-    .columns{
-        .column{
-            h2{
-                margin-bottom: 0.5rem;
-            }
-            .field{
-                margin-bottom: 1.5rem;
-            }
-        }
-    }
-}
-
 .button.is-primary{
     background-color: #00d1b2;
 }
@@ -56,10 +35,35 @@
     }
 }
 
-
+.column.project_explenation{
+    h1, h2, h3, h4, h5, h6{
+        font-weight: bold;
+    }
+    h1{
+        font-size: 2rem;
+    }
+    h2{
+        font-size: 1.75rem;
+    }
+    h3{
+        font-size: 1.5rem;
+    }
+    h4{
+        font-size: 1.25rem;
+    }
+    h5, h6{
+        font-size: 1rem;
+    }
+    p{
+        margin-bottom: 2rem;
+    }
+}
 
 
 .column{
+    .box.box-reward{
+        padding: 1rem;
+    }
     .box{
         padding: 0;
         border-radius: 0;
@@ -88,6 +92,14 @@
             .progress, .level{
                 margin-bottom: 0;
             }
+        }
+    }
+    .project_form{
+        h2{
+            margin-bottom: 0.5rem;
+        }
+        .field{
+            margin-bottom: 1.5rem;
         }
     }
 }

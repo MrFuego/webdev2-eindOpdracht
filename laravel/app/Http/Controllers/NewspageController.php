@@ -10,7 +10,7 @@ class NewspageController extends Controller
     public function news()
     {
 
-        $news = News::all();
+        $news = News::orderBy('created_at', 'desc')->get();
 
         return view('news')->with(compact('news'));
     }

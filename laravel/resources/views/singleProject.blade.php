@@ -18,9 +18,9 @@
     </div>
     <div class="column is-half">
         <section class="project-info">
-            <h1 class="title is-5 is-spaced"> {{ $project->first()['project_name'] }} </h1>
+            <h1 class="title is-4 is-spaced"> {{ $project->first()['project_name'] }} </h1>
             <p class="intro">
-                {{ $project->first()['project_description'] }}
+                {{ $project->first()['project_intro'] }}
             </p>
             <div class="level">
                 <div class="level-left">
@@ -50,6 +50,29 @@
                 </p>
             </div>
         </section>
+    </div>
+    <div class="column is-three-quarters project_explenation">
+        {!! $project->first()['project_description'] !!}
+    </div>
+    <div class="column is-one-quarter">
+        @foreach ( $project->rewards as $reward )
+            <div class="box box-reward">
+                <p class="has-text-weight-bold">
+                    {{ $reward->price }}
+                </p>
+                <h2 class="title is-6">
+                    Doneer {{ $reward->name }} Cr of meer
+                </h2>
+                <p>
+                    {{ $reward->description }}
+                </p>
+                <div class="control">
+                    <button id="buy-perk-{{ $reward->id }}" type="submit" class="button is-primary buy-perk">
+                        Koop deze reward
+                    </button>
+                </div>
+            </div>
+        @endforeach
     </div>
 
 @endsection

@@ -21,7 +21,7 @@
 
     <div class="column is-full">
 
-        <h2 class="title is-3">Korte uitleg over ons komt hier</h2>
+        <h2 class="title is-3">Uitgelichte projecten</h2>
 
     </div>
 
@@ -71,7 +71,7 @@
     @endforeach
     <div class="column is-full">
 
-        <h2 class="title is-3">Recentste nieuwsberichten komen hier</h2>
+        <h2 class="title is-3">Recent nieuws</h2>
 
     </div>
 
