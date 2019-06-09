@@ -18,10 +18,12 @@
     </div>
     <div class="column is-half">
         <section class="project-info">
-            <h1 class="title is-4 is-spaced"> {{ $project->first()['project_name'] }} </h1>
-            <p class="intro">
-                {{ $project->first()['project_intro'] }}
-            </p>
+            <div class="individual-project-info">
+                <h1 class="title is-4 is-spaced"> {{ $project->first()['project_name'] }} </h1>
+                <p class="intro">
+                    {{ $project->first()['project_intro'] }}
+                </p>
+            </div>
             <div class="level">
                 <div class="level-left">
                     <p>
@@ -49,6 +51,11 @@
                     backers
                 </p>
             </div>
+            <div class="level-right">
+                <button id="download-project-{{ $project->totalBackers }}" type="submit" class="button is-primary download-pdf">
+                    pdf downloaden
+                </button>
+            </div>
         </section>
     </div>
     <div class="column is-three-quarters project_explenation">
@@ -57,11 +64,11 @@
     <div class="column is-one-quarter">
         @foreach ( $project->rewards as $reward )
             <div class="box box-reward">
-                <p class="has-text-weight-bold">
-                    {{ $reward->price }}
+                <p>
+                    Doneer <strong class="has-text-weight-bold">{{ $reward->price }}</strong> Cr of meer
                 </p>
                 <h2 class="title is-6">
-                    Doneer {{ $reward->name }} Cr of meer
+                    {{ $reward->name }}
                 </h2>
                 <p>
                     {{ $reward->description }}

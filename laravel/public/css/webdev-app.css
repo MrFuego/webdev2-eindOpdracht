@@ -10818,6 +10818,15 @@ label.panel-block:hover {
   margin-bottom: 2rem;
 }
 
+.column .individual-project-info {
+  height: 15rem;
+}
+
+.column .progress,
+.column .level {
+  margin-bottom: 0;
+}
+
 .column .box.box-reward {
   padding: 1rem;
 }
@@ -10860,12 +10869,21 @@ label.panel-block:hover {
   margin-bottom: 0;
 }
 
+.column .box .columns.project-profile {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
 .column .project_form h2 {
   margin-bottom: 0.5rem;
 }
 
 .column .project_form .field {
   margin-bottom: 1.5rem;
+}
+
+.column a {
+  text-decoration: none;
 }
 
 .project-container-uitgelicht .box .project-info {

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 // benodigde namespaces inladen
 use App\Models\Image;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Reward;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectUploadController extends Controller
 {
+
     public function index() {
 
         //VOORBEELD OM DINGEN UIT DATABASE TE HALEN
@@ -43,16 +45,12 @@ class ProjectUploadController extends Controller
         if($validator->fails()) {
             return Redirect::back()
                 ->withInput()
-                ->withErrors($validator)
-                ->with(
-                    [
-                    'notification' => 'danger',
-                    'message' => 'something went wrong!'
-                    ]
-                );
-        } else{
+                ->withErrors($validator);
 
-            $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_intro, $request->project_description, $request->final_date, $request->goal, $request->project_category );
+        } else{
+            $userId = Auth::id();
+
+            $project_id = $this->storeProjectToDatabase( $request->project_name, $request->project_intro, $request->project_description, $request->final_date, $request->goal, $request->project_category, $userId );
 
 
             if($request->perk_title !== 'empty'){
@@ -81,6 +79,7 @@ class ProjectUploadController extends Controller
 
 
             }
+
             return back()->with([
                 'notification' => 'success',
                 'message' => 'Het project is succesvol opgeladen'
@@ -89,7 +88,7 @@ class ProjectUploadController extends Controller
     }
 
 
-    private function storeProjectToDatabase( $project_name, $project_intro, $project_description, $final_date, $goal, $project_category ) {
+    private function storeProjectToDatabase( $project_name, $project_intro, $project_description, $final_date, $goal, $project_category, $userId ) {
 
         $project = new Project();
 
@@ -99,7 +98,7 @@ class ProjectUploadController extends Controller
         $project->final_date = $final_date;
         $project->goal = $goal;
         $project->category = $project_category;
-        $project->user_id = 1;
+        $project->user_id = $userId;
 
 
         $project->save();

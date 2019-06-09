@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fffe4c7ee5590a9108455ab04a5dfc58",
+    "content-hash": "dde55c5bbb24a48a4cb27f3ded19c685",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
@@ -1058,6 +1058,40 @@
             "time": "2018-11-05T09:00:11+00:00"
         },
         {
+            "name": "needim/noty",
+            "version": "v3.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/needim/noty.git",
+                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/needim/noty/zipball/77268c46b6db6a1eb7a920ed7c859fbc8de17993",
+                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nedim Arabaci",
+                    "homepage": "http://ned.im",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Noty is a library that makes it easy to create alert - success - error - warning - information - confirmation messages as an alternative the standard alert dialog.",
+            "homepage": "http://ned.im/noty",
+            "keywords": [
+                "notification",
+                "noty"
+            ],
+            "time": "2017-12-13T20:36:34+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.16.2",
             "source": {
@@ -1713,6 +1747,53 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "rsmalc/laravel-noty",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rsmalc/laravel-noty.git",
+                "reference": "28942c92f73252fee55f7a13cde0d8f814c55c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rsmalc/laravel-noty/zipball/28942c92f73252fee55f7a13cde0d8f814c55c24",
+                "reference": "28942c92f73252fee55f7a13cde0d8f814c55c24",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1, <5.9",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RSmalc\\Noty\\NotyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RSmalc\\": "src/"
+                },
+                "files": [
+                    "src/Noty/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Smalc",
+                    "email": "robert@smalc.si"
+                }
+            ],
+            "description": "Flash Messages for Laravel Aplication using Noty v3 library",
+            "time": "2019-04-24T11:34:15+00:00"
         },
         {
             "name": "stripe/stripe-php",

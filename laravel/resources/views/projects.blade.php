@@ -94,7 +94,7 @@
                     <section class="project-info">
                         <h1 class="title is-5 is-spaced"> {{ $project->project_name }} </h1>
                         <p class="intro">
-                            {{ $project->project_description }}
+                            {{ $project->project_intro }}
                         </p>
                         <div class="level">
                             <div class="level-left">

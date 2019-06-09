@@ -1,10 +1,8 @@
-
 @extends('layout')
 
-@section('title', 'add project')
+@section('title', 'projects')
 
 @section('content')
-
 
     <div class="column is-full">
         <h1 class="title">Project uploader</h1>
@@ -18,7 +16,10 @@
         </div>
     @endif
     <div class="column is-full">
-        <form class="project_form" action="{{ route('project.upload') }}" method="post" enctype="multipart/form-data">
+        <form class="project_form" action="/projects/update/{{ $project->id }}" method="post" enctype="multipart/form-data">
+
+            @method('PATCH')
+
             @csrf
 
 
@@ -42,7 +43,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                    <input class="input is-expanded" type="text" name="project_name" placeholder="Mijn waanzinnig project">
+                    <input class="input is-expanded" type="text" name="project_name" placeholder="Mijn waanzinnig project" value="{{ $project->project_name }}">
                 </div>
             </div>
 
@@ -51,7 +52,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                        <input class="input" name="goal" type="number" placeholder='1000'>
+                        <input class="input" name="goal" type="number" placeholder="1000" value="{{ $project->goal }}">
                 </div>
             </div>
 
@@ -61,7 +62,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                        <input class="input" name="final_date" type="date">
+                        <input class="input" name="final_date" type="date" value="{{ $project->final_date }}">
                 </div>
             </div>
 
@@ -84,7 +85,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                    <input class="input" type="textfield" name="project_intro" placeholder="Mijn korte uitleg over mijn project">
+                    <input class="input" type="textfield" name="project_intro" placeholder="Mijn korte uitleg over mijn project" value="{{ $project->project_intro }}">
                 </div>
             </div>
 
@@ -93,11 +94,11 @@
             </h2>
             <div class="field">
                 <div class="control">
-                    <textarea class="input" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project"></textarea>
+                    <textarea class="input" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project" value="{{ $project->project_description }}"></textarea>
                 </div>
             </div>
 
-            <table id="imageUploadTable" class="table is-striped">
+            {{-- <table id="imageUploadTable" class="table is-striped">
                 <tbody>
                     <tr id="first">
                         <td>
@@ -182,11 +183,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="control">
                 <button type="submit" class="button is-primary">
-                    @lang('labels.send')
+                    Project updaten
                 </button>
             </div>
         </form>
@@ -203,66 +204,66 @@
     </div> --}}
     </div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    CKEDITOR.replace( 'project_description' );
+        CKEDITOR.replace( 'project_description' );
 
-    let amountOfImages = 1;
-    let amountOfPerks = 1;
-    $(document).ready(function() {
-        setAmountOfImages();
-        $(".button.is-success.add-image").click(function(){
-            addImageRow();
-            updateAmountOfImages();
-        });
-        $("body").on("click",".button.is-danger.remove-image",function(){
-            $(this).parents("tr").remove();
-            updateAmountOfImages();
-        });
-        function addImageRow() {
-            var html = $("#clone-image").html();
-            $("#imageUploadTable tr:last-of-type").after(html);
-        }
-        function setAmountOfImages() {
-            let amountOfRows = $('#amountOfImages').val();
-            for(i=1;i<amountOfRows;i++) {
+        let amountOfImages = 1;
+        let amountOfPerks = 1;
+        $(document).ready(function() {
+            setAmountOfImages();
+            $(".button.is-success.add-image").click(function(){
                 addImageRow();
+                updateAmountOfImages();
+            });
+            $("body").on("click",".button.is-danger.remove-image",function(){
+                $(this).parents("tr").remove();
+                updateAmountOfImages();
+            });
+            function addImageRow() {
+                var html = $("#clone-image").html();
+                $("#imageUploadTable tr:last-of-type").after(html);
             }
-        }
-        function updateAmountOfImages() {
-            let amountOfRows = $('#imageUploadTable tr').length;
-            $('#amountOfImages').val(amountOfRows);
-        }
+            function setAmountOfImages() {
+                let amountOfRows = $('#amountOfImages').val();
+                for(i=1;i<amountOfRows;i++) {
+                    addImageRow();
+                }
+            }
+            function updateAmountOfImages() {
+                let amountOfRows = $('#imageUploadTable tr').length;
+                $('#amountOfImages').val(amountOfRows);
+            }
 
 
 
-        setAmountOfPerks();
-        $(".button.is-success.add-perk").click(function(){
-            console.log("test");
-            addPerkRow();
-            updateAmountOfPerks();
-        });
-        $("body").on("click",".button.is-danger.remove-perk",function(){
-            $(this).parents("div.perk").remove();
-            updateAmountOfPerks();
-        });
-        function addPerkRow() {
-            console.log("test3");
-            var html = $("#clone-perk").html();
-            $("#perkUploadTable div.perk:last-of-type").after(html);
-        }
-        function setAmountOfPerks() {
-            let amountOfRows = $('#amountOfPerks').val();
-            for(i=1;i<amountOfRows;i++) {
+            setAmountOfPerks();
+            $(".button.is-success.add-perk").click(function(){
+                console.log("test");
                 addPerkRow();
+                updateAmountOfPerks();
+            });
+            $("body").on("click",".button.is-danger.remove-perk",function(){
+                $(this).parents("div.perk").remove();
+                updateAmountOfPerks();
+            });
+            function addPerkRow() {
+                console.log("test3");
+                var html = $("#clone-perk").html();
+                $("#perkUploadTable div.perk:last-of-type").after(html);
             }
-        }
-        function updateAmountOfPerks() {
-            let amountOfRows = $('#perkUploadTable div.perk').length;
-            $('#amountOfPerks').val(amountOfRows);
-        }
-    });
-</script>
+            function setAmountOfPerks() {
+                let amountOfRows = $('#amountOfPerks').val();
+                for(i=1;i<amountOfRows;i++) {
+                    addPerkRow();
+                }
+            }
+            function updateAmountOfPerks() {
+                let amountOfRows = $('#perkUploadTable div.perk').length;
+                $('#amountOfPerks').val(amountOfRows);
+            }
+        });
+    </script>
 
 
 @endsection

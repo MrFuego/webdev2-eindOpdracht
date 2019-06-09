@@ -6,6 +6,8 @@ use App\Models\Project;
 use App\Models\Pledge;
 use App\Models\Image;
 use App\Models\Reward;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 class ProjectsController extends Controller
 {
@@ -54,7 +56,67 @@ class ProjectsController extends Controller
 
         $project->rewards = Reward::all()->where('project_id', $project_id);
 
+        $project->id = $project_id;
+
         return view('singleProject')->with(compact('project'));
+    }
+
+
+
+    public function edit($id){
+
+        $project = Project::findOrFail($id);
+
+        $categories = Category::all();
+
+        return view('projectEdit')->with( compact('project', 'categories') );
+    }
+
+    public function update(){
+
+
+        dd(request()->data);
+    }
+
+
+
+    public function destroy($id){
+        //dd($id);
+
+        $project = Project::findOrFail($id);
+
+        if($project->pledges->first()){
+            return back()->with([
+                'notification' => 'danger',
+                'message' => 'dit project kan niet verwijderd worden omdat er al donaties zijn!'
+            ]);
+        }else{
+
+            $project->images = Image::all()->where('project_id', $id);
+
+            foreach( $project->images as $image){
+                $file = str_replace('storage/', '', $image->filepath) . '/' . $image->filename;
+
+                Storage::disk('public')->delete($file);
+
+            }
+
+            rmdir(storage_path('app/public/project-'.$id));
+
+
+            $project->images()->delete();
+
+            $project->rewards()->delete();
+
+            $project->delete();
+            return back()->with([
+                'notification' => 'success',
+                'message' => 'Het project is succesvol verwijderd'
+            ]);
+            return redirect('/profile');
+        }
+
+
     }
 
 }

@@ -61,6 +61,12 @@
 
 
 .column{
+    .individual-project-info{
+        height: 15rem;
+    }
+    .progress, .level{
+        margin-bottom: 0;
+    }
     .box.box-reward{
         padding: 1rem;
     }
@@ -93,6 +99,10 @@
                 margin-bottom: 0;
             }
         }
+        .columns.project-profile{
+            padding: 0 1rem;
+            margin-bottom: 1rem;
+        }
     }
     .project_form{
         h2{
@@ -101,6 +111,9 @@
         .field{
             margin-bottom: 1.5rem;
         }
+    }
+    a{
+        text-decoration: none;
     }
 }
 

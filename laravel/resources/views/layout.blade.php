@@ -8,29 +8,23 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
         <title>@yield('title', 'Clickstarter')</title>
-
-        <!-- Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @include('partials.styles')
+
+        <!-- Sripts -->
+        @include('partials.scripts')
 
 
-        <link rel="stylesheet" href="{{ asset('css/webdev-app.css')}}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     </head>
     <body class="has-navbar-fixed-top">
 
-        @include('partials/header')
+        @include('partials.header')
 
         <section class="section">
             <div class="container is-widescreen">
@@ -42,8 +36,7 @@
             </div>
         </section>
 
-        @include('partials/footer')
-        @include('partials/scripts')
+        @include('partials.footer')
 
     </body>
 </html>

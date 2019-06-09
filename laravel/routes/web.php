@@ -17,23 +17,23 @@ Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 
-// routes om de prrojecten op te vragen
+// routes om de projecten op te vragen
 Route::get('/projects', 'ProjectsController@projects')->name('projects');
 Route::get('/projects/{project_id}', 'ProjectsController@getProject');
+Route::delete('/project/{project_id}', 'ProjectsController@destroy');
+Route::get('/projects/{project_id}/edit', 'ProjectsController@edit');
+Route::put('/project/update/{project_id}', 'ProjectsController@editProject')->name('project.update');
 
 Route::get('/news', 'NewspageController@news')->name('news');
 Route::get('/news/{news_id}', 'NewspageController@getNews');
 
 
-Route::get('/profile', function () {
-    return view('pages/profile');
-})->name('profile');
+Route::get('/profile', 'ProfilepageController@index')->name('profile');
 
 
 // routes voor project uploader
 Route::get('/addProject', 'ProjectUploadController@index')->name('project.add');
 Route::post('/addProject', 'ProjectUploadController@store')->name('project.upload');
-
 
 // route om een testmail te sturen
 Route::get('/sendtestmail', 'MailTestController@sendMail');
