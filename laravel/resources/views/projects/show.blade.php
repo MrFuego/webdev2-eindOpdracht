@@ -4,6 +4,13 @@
 
 @section('content')
 
+    @if(Session::has('notification'))
+        <div class="column is-full">
+            <div class="notification is-{{ Session::get('notification') }}">
+                {{ Session::get('message') }}
+            </div>
+        </div>
+    @endif
 
     <div class="column is-half">
         <div class="box">
@@ -42,7 +49,8 @@
                     </p>
                 </div>
             </div>
-            <progress class="progress is-info" value="{{ $project->progress }}" max="100">45%</progress>
+
+            <progress class="progress is-info" value="{{ $project->progress }}" max="100"></progress>
             <div class="level-right">
                 <p>
                     <strong>
@@ -74,9 +82,12 @@
                     {{ $reward->description }}
                 </p>
                 <div class="control">
-                    <button id="buy-perk-{{ $reward->id }}" type="submit" class="button is-primary buy-perk">
-                        Koop deze reward
-                    </button>
+                    <form action="/buy/{{ $reward->id }}" method="post">
+                        @csrf
+                        <button id="buy-perk-{{ $reward->id }}" type="submit" class="button is-primary buy-perk">
+                            Koop deze reward
+                        </button>
+                    </form>
                 </div>
             </div>
         @endforeach

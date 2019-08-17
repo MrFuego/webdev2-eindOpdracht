@@ -18,7 +18,7 @@
                     <a class="navbar-item @if(Route::is('index')) is-active @endif" href="{{ route('index') }}">
                         Home
                     </a>
-                    <a class="navbar-item @if(Route::is('projects')) is-active @endif" href="{{ route('projects') }}">
+                    <a class="navbar-item @if(Route::is('projects.index')) is-active @endif" href="{{ route('projects.index') }}">
                         Projecten
                     </a>
                     <a class="navbar-item @if(Route::is('news')) is-active @endif" href="{{ route('news') }}">

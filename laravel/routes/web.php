@@ -18,11 +18,10 @@ Route::get('/contact', 'PagesController@contact')->name('contact');
 Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 
 // routes om de projecten op te vragen
-Route::get('/projects', 'ProjectsController@projects')->name('projects');
-Route::get('/projects/{project_id}', 'ProjectsController@getProject');
-Route::delete('/project/{project_id}', 'ProjectsController@destroy');
-Route::get('/projects/{project_id}/edit', 'ProjectsController@edit');
-Route::put('/project/update/{project_id}', 'ProjectsController@editProject')->name('project.update');
+Route::resource('projects', 'ProjectsController');
+
+Route::post('/buy/{reward_id}', 'DonationController@makeDonation')->name('buy');
+
 
 Route::get('/news', 'NewspageController@news')->name('news');
 Route::get('/news/{news_id}', 'NewspageController@getNews');

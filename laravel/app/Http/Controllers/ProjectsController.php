@@ -8,10 +8,11 @@ use App\Models\Image;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
-    public function projects()
+    public function index()
     {
 
         $projects = Project::all();
@@ -31,13 +32,13 @@ class ProjectsController extends Controller
             $project->totalBackers = count(Pledge::all()->where('project_id', $project->id)->groupBy('user_id'));
         }
 
-        return view('projects')->with(compact('projects'));
+        return view('projects.index')->with(compact('projects'));
 
     }
 
-    public function getProject($project_id)
+    public function show($id)
     {
-        $project = Project::where('id', $project_id);
+        $project = Project::where('id', $id);
 
         // calculates how much days untill the project ends
         $project->daysToGo = Project::calculateDaysToGo($project->first()['final_date']);
@@ -47,35 +48,54 @@ class ProjectsController extends Controller
         $project->allPledges = Project::calculateSumOfPledges($project->first()['pledges']);
 
         // calculates the total progress of all the pledges
-        $project->progress = Project::calculateDonationProgress($project->first()['goal'], $project->first()['allPledges']);
+        $project->progress = Project::calculateDonationProgress($project->first()['goal'], $project->allPledges);
+
 
         // counts the amount of unique backers
         $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
 
-        $project->images = Image::all()->where('project_id', $project_id);
+        $project->images = Image::all()->where('project_id', $id);
 
-        $project->rewards = Reward::all()->where('project_id', $project_id);
+        $project->rewards = Reward::all()->where('project_id', $id);
 
-        $project->id = $project_id;
+        $project->id = $id;
 
-        return view('singleProject')->with(compact('project'));
+        return view('projects.show')->with(compact('project'));
     }
 
 
 
     public function edit($id){
 
-        $project = Project::findOrFail($id);
+        $userId = Auth::id();
+        $project = Project::find($id);
 
-        $categories = Category::all();
+        if($userId === 1 || $userId === $project->user_id){
 
-        return view('projectEdit')->with( compact('project', 'categories') );
+            $categories = Category::all();
+
+            return view('projects.edit')->with(compact('project', 'categories'));
+
+        }else{
+            return redirect('/projects');
+        }
+
     }
 
-    public function update(){
+    public function update($id){
 
+        $project = Project::find($id);
 
-        dd(request()->data);
+        $project->project_name = request('project_name');
+        $project->project_intro = request('project_intro');
+        $project->project_description = request('project_description');
+        $project->category = request('project_category');
+        $project->final_date = request('final_date');
+        $project->goal = request('goal');
+
+        $project->save();
+
+        return redirect('/projects/' . $id);
     }
 
 

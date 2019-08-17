@@ -10,17 +10,6 @@
         </div>
     @endif
 
-    @include('noty::message')
-
-    <script>
-        @if(Session::has('message'))
-            new Noty({
-                type:'success',
-                layout:'right',
-                text: '{{ Session::get('message') }}',
-            }).show();
-        @endif
-    </script>
 
 
 
@@ -60,7 +49,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <progress class="progress is-info" value="{{ $project->progress }}" max="100">45%</progress>
+                            <progress class="progress is-info" value="{{ $project->progress }}" max="100"></progress>
                             <div class="level-right">
                                 <p>
                                     <strong>
@@ -74,17 +63,17 @@
                     <div class="column is-full">
                             <div class="level">
                                 <div class="level-left">
-
+                                    <form action="/projects/{{ $project->id }}/edit" method="get">
                                         <input type="hidden" value="{{ $project->id }} name="project_id">
                                         <div class="control">
                                             <button type="submit" class="button is-success">
                                                 Project bewerken
                                             </button>
                                         </div>
-
+                                    </form>
                                 </div>
                                 <div class="level-right">
-                                    <form action="/project/{{ $project->id }}" method="post">
+                                    <form action="/projects/{{ $project->id }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <div class="control">

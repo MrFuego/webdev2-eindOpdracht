@@ -1,11 +1,13 @@
+
 @extends('layout')
 
-@section('title', 'projects')
+@section('title', 'edit project')
 
 @section('content')
 
+
     <div class="column is-full">
-        <h1 class="title">Project uploader</h1>
+        <h1 class="title">Project aanpassen</h1>
     </div>
 
     <!-- Notificatie laten zien -->
@@ -16,9 +18,9 @@
         </div>
     @endif
     <div class="column is-full">
-        <form class="project_form" action="/projects/update/{{ $project->id }}" method="post" enctype="multipart/form-data">
+        <form class="project_form" action="/projects/{{ $project->id }}" method="post" enctype="multipart/form-data">
 
-            @method('PATCH')
+            {{ method_field('PATCH') }}
 
             @csrf
 
@@ -52,7 +54,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                        <input class="input" name="goal" type="number" placeholder="1000" value="{{ $project->goal }}">
+                        <input class="input" name="goal" type="number" placeholder='1000' value="{{ $project->goal }}">
                 </div>
             </div>
 
@@ -94,11 +96,11 @@
             </h2>
             <div class="field">
                 <div class="control">
-                    <textarea class="input" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project" value="{{ $project->project_description }}"></textarea>
+                    <textarea class="input" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project" value="{{ $project->description }}"></textarea>
                 </div>
             </div>
 
-            {{-- <table id="imageUploadTable" class="table is-striped">
+            <table id="imageUploadTable" class="table is-striped">
                 <tbody>
                     <tr id="first">
                         <td>
@@ -183,11 +185,11 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="control">
                 <button type="submit" class="button is-primary">
-                    Project updaten
+                    @lang('labels.update')
                 </button>
             </div>
         </form>
@@ -204,66 +206,66 @@
     </div> --}}
     </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        CKEDITOR.replace( 'project_description' );
+    CKEDITOR.replace( 'project_description' );
 
-        let amountOfImages = 1;
-        let amountOfPerks = 1;
-        $(document).ready(function() {
-            setAmountOfImages();
-            $(".button.is-success.add-image").click(function(){
-                addImageRow();
-                updateAmountOfImages();
-            });
-            $("body").on("click",".button.is-danger.remove-image",function(){
-                $(this).parents("tr").remove();
-                updateAmountOfImages();
-            });
-            function addImageRow() {
-                var html = $("#clone-image").html();
-                $("#imageUploadTable tr:last-of-type").after(html);
-            }
-            function setAmountOfImages() {
-                let amountOfRows = $('#amountOfImages').val();
-                for(i=1;i<amountOfRows;i++) {
-                    addImageRow();
-                }
-            }
-            function updateAmountOfImages() {
-                let amountOfRows = $('#imageUploadTable tr').length;
-                $('#amountOfImages').val(amountOfRows);
-            }
-
-
-
-            setAmountOfPerks();
-            $(".button.is-success.add-perk").click(function(){
-                console.log("test");
-                addPerkRow();
-                updateAmountOfPerks();
-            });
-            $("body").on("click",".button.is-danger.remove-perk",function(){
-                $(this).parents("div.perk").remove();
-                updateAmountOfPerks();
-            });
-            function addPerkRow() {
-                console.log("test3");
-                var html = $("#clone-perk").html();
-                $("#perkUploadTable div.perk:last-of-type").after(html);
-            }
-            function setAmountOfPerks() {
-                let amountOfRows = $('#amountOfPerks').val();
-                for(i=1;i<amountOfRows;i++) {
-                    addPerkRow();
-                }
-            }
-            function updateAmountOfPerks() {
-                let amountOfRows = $('#perkUploadTable div.perk').length;
-                $('#amountOfPerks').val(amountOfRows);
-            }
+    let amountOfImages = 1;
+    let amountOfPerks = 1;
+    $(document).ready(function() {
+        setAmountOfImages();
+        $(".button.is-success.add-image").click(function(){
+            addImageRow();
+            updateAmountOfImages();
         });
-    </script>
+        $("body").on("click",".button.is-danger.remove-image",function(){
+            $(this).parents("tr").remove();
+            updateAmountOfImages();
+        });
+        function addImageRow() {
+            var html = $("#clone-image").html();
+            $("#imageUploadTable tr:last-of-type").after(html);
+        }
+        function setAmountOfImages() {
+            let amountOfRows = $('#amountOfImages').val();
+            for(i=1;i<amountOfRows;i++) {
+                addImageRow();
+            }
+        }
+        function updateAmountOfImages() {
+            let amountOfRows = $('#imageUploadTable tr').length;
+            $('#amountOfImages').val(amountOfRows);
+        }
+
+
+
+        setAmountOfPerks();
+        $(".button.is-success.add-perk").click(function(){
+            console.log("test");
+            addPerkRow();
+            updateAmountOfPerks();
+        });
+        $("body").on("click",".button.is-danger.remove-perk",function(){
+            $(this).parents("div.perk").remove();
+            updateAmountOfPerks();
+        });
+        function addPerkRow() {
+            console.log("test3");
+            var html = $("#clone-perk").html();
+            $("#perkUploadTable div.perk:last-of-type").after(html);
+        }
+        function setAmountOfPerks() {
+            let amountOfRows = $('#amountOfPerks').val();
+            for(i=1;i<amountOfRows;i++) {
+                addPerkRow();
+            }
+        }
+        function updateAmountOfPerks() {
+            let amountOfRows = $('#perkUploadTable div.perk').length;
+            $('#amountOfPerks').val(amountOfRows);
+        }
+    });
+</script>
 
 
 @endsection

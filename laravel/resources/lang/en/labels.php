@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'send' => 'Verzenden',
-    'update' => 'Wijzigingen opslaan',
-    'project_id'     => 'Het project id',
+    'send' => 'Send',
+    'update' => 'Save changes',
+    'project_id'     => 'The project id',
 ];

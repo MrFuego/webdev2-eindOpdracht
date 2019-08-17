@@ -41,3 +41,8 @@
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
 }
+
+
+.payment-container {
+    margin-top: 10%;
+}
