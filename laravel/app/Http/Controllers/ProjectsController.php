@@ -167,8 +167,6 @@ class ProjectsController extends Controller
 
     public function inactive($id){
 
-
-
         $project = Project::findOrFail($id);
 
 

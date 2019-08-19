@@ -16,12 +16,6 @@ class ProjectUploadController extends Controller
 {
 
     public function index() {
-
-        //VOORBEELD OM DINGEN UIT DATABASE TE HALEN
-//        $project = Project::where('id', 1)->first();
-
-//       dd($project->images);
-
         $categories = Category::all();
 
         return view('uploader.index')->with(compact('categories'));
