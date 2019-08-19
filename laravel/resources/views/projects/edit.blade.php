@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <table id="imageUploadTable" class="table is-striped">
+{{--             <table id="imageUploadTable" class="table is-striped">
                 <tbody>
                     <tr id="first">
                         <td>
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="control">
                 <button type="submit" class="button is-primary">

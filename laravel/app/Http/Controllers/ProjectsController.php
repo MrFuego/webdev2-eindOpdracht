@@ -15,6 +15,24 @@ class ProjectsController extends Controller
     public function index()
     {
 
+        $projectsU = Project::all()->where('uitgelicht', '1')->random(2);
+
+
+        foreach($projectsU as $projectU){
+
+            // calculates how much days untill the project ends
+            $projectU->daysToGo = Project::calculateDaysToGo($projectU->final_date);
+
+            // calculates the total sum of all the pledges
+            $projectU->allPledges = Project::calculateSumOfPledges($projectU->pledges);
+
+            // calculates the total progress of all the pledges
+            $projectU->progress = Project::calculateDonationProgress($projectU->goal, $projectU->allPledges);
+
+            // counts the amount of unique backers
+            $projectU->totalBackers = count(Pledge::all()->where('project_id', $projectU->id)->groupBy('user_id'));
+        }
+
         $projects = Project::all()->where('active', 1);
 
         foreach($projects as $project){
@@ -32,7 +50,7 @@ class ProjectsController extends Controller
             $project->totalBackers = count(Pledge::all()->where('project_id', $project->id)->groupBy('user_id'));
         }
 
-        return view('projects.index')->with(compact('projects'));
+        return view('projects.index')->with(compact('projects', 'projectsU'));
 
     }
 

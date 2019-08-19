@@ -2,95 +2,53 @@
 
 <?php $__env->startSection('content'); ?>
 
+    <?php $__currentLoopData = $projectsU; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $projectU): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
+            <a href="projects/<?php echo e($projectU->id); ?>">
+                <div class="box">
+                    <div class="image-project has-background-light" style="background-image: url('<?php echo e(asset($projectU->images->first()['filepath'])  . '/' . $projectU->images->first()['filename']); ?>')"></div>
+                    <section class="project-info">
+                        <h1 class="title is-2 is-spaced"> <?php echo e($projectU->project_name); ?> </h1>
+                        <p class="intro">
+                            <?php echo e($projectU->project_description); ?>
 
-    <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
-        <div class="box">
-            <div class="image-project has-background-light"  style="background-image: url('http://localhost:8000/storage/project-3/AC-Dc-George-Young-55cecf4ffae5e2.jpg')">
-            </div>
-            <section class="project-info">
-                <h1 class="title is-2 is-spaced"> <?php echo e($projects[0]->project_name); ?> </h1>
-                <p class="intro">
-                    <?php echo e($projects[0]->project_description); ?>
-
-                </p>
-                <div class="level">
-                    <div class="level-left">
-                        <p>
-                            <strong>
-                                <?php echo e($projects[0]->allPledges); ?>
-
-                            </strong>
-                            credits gedoneerd
                         </p>
-                    </div>
-                    <div class="level-right">
-                        <p>
-                            <strong>
-                                <?php echo e($projects[0]->daysToGo); ?>
+                        <div class="level">
+                            <div class="level-left">
+                                <p>
+                                    <strong>
+                                        <?php echo e($projectU->allPledges); ?>
 
-                            </strong>
-                            dagen te gaan
-                        </p>
-                    </div>
-                </div>
-                <progress class="progress is-info" value="<?php echo e($projects[0]->progress); ?>" max="100">45%</progress>
-                <div class="level-right">
-                    <p>
-                        <strong>
-                            <?php echo e($projects[0]->totalBackers); ?>
+                                    </strong>
+                                    credits gedoneerd
+                                </p>
+                            </div>
+                            <div class="level-right">
+                                <p>
+                                    <strong>
+                                        <?php echo e($projectU->daysToGo); ?>
 
-                        </strong>
-                        backers
-                    </p>
+                                    </strong>
+                                    dagen te gaan
+                                </p>
+                            </div>
+                        </div>
+                        <progress class="progress is-info" value="<?php echo e($projectU->progress); ?>" max="100"></progress>
+                        <div class="level-right">
+                            <p>
+                                <strong>
+                                    <?php echo e($projectU->totalBackers); ?>
+
+                                </strong>
+                                backers
+                            </p>
+                        </div>
+                    </section>
                 </div>
-            </section>
+            </a>
         </div>
-    </div>
 
-
-    <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
-        <div class="box">
-            <div class="image-project has-background-light"  style="background-image: url('http://localhost:8000/storage/project-3/AC-Dc-George-Young-55cecf4ffae5e2.jpg')">
-            </div>
-            <section class="project-info">
-                <h1 class="title is-2 is-spaced"> <?php echo e($projects[0]->project_name); ?> </h1>
-                <p class="intro">
-                    <?php echo e($projects[0]->project_description); ?>
-
-                </p>
-                <div class="level">
-                    <div class="level-left">
-                        <p>
-                            <strong>
-                                <?php echo e($projects[0]->allPledges); ?>
-
-                            </strong>
-                            credits gedoneerd
-                        </p>
-                    </div>
-                    <div class="level-right">
-                        <p>
-                            <strong>
-                                <?php echo e($projects[0]->daysToGo); ?>
-
-                            </strong>
-                            dagen te gaan
-                        </p>
-                    </div>
-                </div>
-                <progress class="progress is-info" value="<?php echo e($projects[0]->progress); ?>" max="100">45%</progress>
-                <div class="level-right">
-                    <p>
-                        <strong>
-                            <?php echo e($projects[0]->totalBackers); ?>
-
-                        </strong>
-                        backers
-                    </p>
-                </div>
-            </section>
-        </div>
-    </div>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile ">

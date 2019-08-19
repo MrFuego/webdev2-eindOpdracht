@@ -23,7 +23,9 @@
             <div class="box">
                 <div class="columns is-multiline project-profile">
                     <div class="column is-half">
-                        <div class="image-project has-background-light" style="background-image: url('{{ asset($project->images->first()['filepath'])  . '/' . $project->images->first()['filename'] }}')"></div>
+                        <a href="projects/{{ $project->id }}">
+                            <div class="image-project has-background-light" style="background-image: url('{{ asset($project->images->first()['filepath'])  . '/' . $project->images->first()['filename'] }}')"></div>
+                        </a>
                     </div>
                     <div class="column is-half">
                         <section class="project-info">

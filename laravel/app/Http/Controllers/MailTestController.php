@@ -13,4 +13,21 @@ class MailTestController extends Controller
         Mail::to('hanndeba2@student.arteveldehs.be')->send($mailClass);
         //Mail::to('frederick.roegiers@arteveldehs.be')->send($mailClass);
     }
+
+
+    public function sendContactMail(Request $request) {
+
+        $mailContent = $request->comment;
+
+        $mailClass = new MailToMyself();
+
+        Mail::to('hanndeba2@student.arteveldehs.be')->send($mailClass);
+        //Mail::to('frederick.roegiers@arteveldehs.be')->send($mailClass);
+
+        return back()->with([
+            'notification' => 'success',
+            'message' => 'Uw mail werd succesvol verzonden'
+        ]);
+        return redirect('/');
+    }
 }

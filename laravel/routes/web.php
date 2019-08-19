@@ -40,6 +40,8 @@ Route::post('/addProject', 'ProjectUploadController@store')->name('project.uploa
 
 // route om een testmail te sturen
 Route::get('/sendtestmail', 'MailTestController@sendMail');
+Route::post('/sendcontactmail', 'MailTestController@sendContactMail')->name('contact.mail');
+
 
 // routes voor de authentificatie
 Auth::routes();

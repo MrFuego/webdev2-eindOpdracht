@@ -4,87 +4,49 @@
 
 @section('content')
 
-
-    <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
-        <div class="box">
-            <div class="image-project has-background-light"  style="background-image: url('http://localhost:8000/storage/project-3/AC-Dc-George-Young-55cecf4ffae5e2.jpg')">
-            </div>
-            <section class="project-info">
-                <h1 class="title is-2 is-spaced"> {{ $projects[0]->project_name }} </h1>
-                <p class="intro">
-                    {{ $projects[0]->project_description }}
-                </p>
-                <div class="level">
-                    <div class="level-left">
-                        <p>
-                            <strong>
-                                {{ $projects[0]->allPledges }}
-                            </strong>
-                            credits gedoneerd
+    @foreach($projectsU as $projectU)
+        <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
+            <a href="projects/{{ $projectU->id }}">
+                <div class="box">
+                    <div class="image-project has-background-light" style="background-image: url('{{ asset($projectU->images->first()['filepath'])  . '/' . $projectU->images->first()['filename'] }}')"></div>
+                    <section class="project-info">
+                        <h1 class="title is-2 is-spaced"> {{ $projectU->project_name }} </h1>
+                        <p class="intro">
+                            {{ $projectU->project_description }}
                         </p>
-                    </div>
-                    <div class="level-right">
-                        <p>
-                            <strong>
-                                {{ $projects[0]->daysToGo }}
-                            </strong>
-                            dagen te gaan
-                        </p>
-                    </div>
+                        <div class="level">
+                            <div class="level-left">
+                                <p>
+                                    <strong>
+                                        {{ $projectU->allPledges }}
+                                    </strong>
+                                    credits gedoneerd
+                                </p>
+                            </div>
+                            <div class="level-right">
+                                <p>
+                                    <strong>
+                                        {{ $projectU->daysToGo }}
+                                    </strong>
+                                    dagen te gaan
+                                </p>
+                            </div>
+                        </div>
+                        <progress class="progress is-info" value="{{ $projectU->progress }}" max="100"></progress>
+                        <div class="level-right">
+                            <p>
+                                <strong>
+                                    {{ $projectU->totalBackers }}
+                                </strong>
+                                backers
+                            </p>
+                        </div>
+                    </section>
                 </div>
-                <progress class="progress is-info" value="{{ $projects[0]->progress }}" max="100">45%</progress>
-                <div class="level-right">
-                    <p>
-                        <strong>
-                            {{ $projects[0]->totalBackers }}
-                        </strong>
-                        backers
-                    </p>
-                </div>
-            </section>
+            </a>
         </div>
-    </div>
 
-
-    <div class="column is-half-desktop is-full-tablet is-full-mobile project-container-uitgelicht">
-        <div class="box">
-            <div class="image-project has-background-light"  style="background-image: url('http://localhost:8000/storage/project-3/AC-Dc-George-Young-55cecf4ffae5e2.jpg')">
-            </div>
-            <section class="project-info">
-                <h1 class="title is-2 is-spaced"> {{ $projects[0]->project_name }} </h1>
-                <p class="intro">
-                    {{ $projects[0]->project_description }}
-                </p>
-                <div class="level">
-                    <div class="level-left">
-                        <p>
-                            <strong>
-                                {{ $projects[0]->allPledges }}
-                            </strong>
-                            credits gedoneerd
-                        </p>
-                    </div>
-                    <div class="level-right">
-                        <p>
-                            <strong>
-                                {{ $projects[0]->daysToGo }}
-                            </strong>
-                            dagen te gaan
-                        </p>
-                    </div>
-                </div>
-                <progress class="progress is-info" value="{{ $projects[0]->progress }}" max="100">45%</progress>
-                <div class="level-right">
-                    <p>
-                        <strong>
-                            {{ $projects[0]->totalBackers }}
-                        </strong>
-                        backers
-                    </p>
-                </div>
-            </section>
-        </div>
-    </div>
+    @endforeach
 
     @foreach ($projects as $project)
         <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile ">
