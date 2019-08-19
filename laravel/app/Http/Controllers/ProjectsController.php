@@ -15,7 +15,7 @@ class ProjectsController extends Controller
     public function index()
     {
 
-        $projects = Project::all();
+        $projects = Project::all()->where('active', 1);
 
         foreach($projects as $project){
 
@@ -40,27 +40,32 @@ class ProjectsController extends Controller
     {
         $project = Project::where('id', $id);
 
-        // calculates how much days untill the project ends
-        $project->daysToGo = Project::calculateDaysToGo($project->first()['final_date']);
+        if($project->first()['active'] === 1){
+
+            // calculates how much days untill the project ends
+            $project->daysToGo = Project::calculateDaysToGo($project->first()['final_date']);
 
 
-        // calculates the total sum of all the pledges
-        $project->allPledges = Project::calculateSumOfPledges($project->first()['pledges']);
+            // calculates the total sum of all the pledges
+            $project->allPledges = Project::calculateSumOfPledges($project->first()['pledges']);
 
-        // calculates the total progress of all the pledges
-        $project->progress = Project::calculateDonationProgress($project->first()['goal'], $project->allPledges);
+            // calculates the total progress of all the pledges
+            $project->progress = Project::calculateDonationProgress($project->first()['goal'], $project->allPledges);
 
 
-        // counts the amount of unique backers
-        $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
+            // counts the amount of unique backers
+            $project->totalBackers = count(Pledge::all()->where('project_id', $project->first()['id'])->groupBy('user_id'));
 
-        $project->images = Image::all()->where('project_id', $id);
+            $project->images = Image::all()->where('project_id', $id);
 
-        $project->rewards = Reward::all()->where('project_id', $id);
+            $project->rewards = Reward::all()->where('project_id', $id);
 
-        $project->id = $id;
+            $project->id = $id;
 
-        return view('projects.show')->with(compact('project'));
+            return view('projects.show')->with(compact('project'));
+        }else{
+            return redirect('/');
+        }
     }
 
 
@@ -69,6 +74,9 @@ class ProjectsController extends Controller
 
         $userId = Auth::id();
         $project = Project::find($id);
+
+
+        $project->final_date = date('Y-m-d', strtotime($project->final_date));
 
         if($userId === 1 || $userId === $project->user_id){
 
@@ -137,6 +145,40 @@ class ProjectsController extends Controller
         }
 
 
+    }
+
+    public function inactive($id){
+
+
+
+        $project = Project::findOrFail($id);
+
+
+        $project->active = 0;
+
+        $project->save();
+
+        return back()->with([
+            'notification' => 'warning',
+            'message' => 'Het project is inactief gemaakt'
+        ]);
+        return redirect('/profile');
+    }
+
+    public function active($id){
+
+        $project = Project::findOrFail($id);
+
+
+        $project->active = 1;
+
+        $project->save();
+
+        return back()->with([
+            'notification' => 'warning',
+            'message' => 'Het project is terug actief gemaakt'
+        ]);
+        return redirect('/profile');
     }
 
 }

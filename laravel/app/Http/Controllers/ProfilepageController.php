@@ -33,6 +33,14 @@ class ProfilepageController extends Controller
 
             // counts the amount of unique backers
             $project->totalBackers = count(Pledge::all()->where('project_id', $project->id)->groupBy('user_id'));
+
+            if($project->active == 1){
+                $project->active = 'active';
+                $project->active_link = 'inactive';
+            }else{
+                $project->active = 'inactive';
+                $project->active_link = 'active';
+            }
         }
 
         return view('pages/profile')->with(compact('projects'));

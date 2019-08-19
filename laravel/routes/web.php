@@ -19,8 +19,12 @@ Route::get('/privacy', 'PagesController@privacy')->name('privacy');
 
 // routes om de projecten op te vragen
 Route::resource('projects', 'ProjectsController');
+Route::post('/projects/{project_id}/inactive', 'ProjectsController@inactive');
+Route::post('/projects/{project_id}/active', 'ProjectsController@active');
+
 
 Route::post('/buy/{reward_id}', 'DonationController@makeDonation')->name('buy');
+Route::get('/projects/{project_id}/donations', 'DonationController@showDonationToProject');
 
 
 Route::get('/news', 'NewspageController@news')->name('news');

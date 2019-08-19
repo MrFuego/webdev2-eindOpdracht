@@ -2,8 +2,8 @@
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="container is-full-width">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <a class="navbar-item" href="{{ route('index') }}">
+                <img src="http://localhost:8000/storage/logo/logo.svg" width="112" height="28">
                 </a>
 
                 <div class="navbar-burger">

@@ -76,7 +76,11 @@
                     <select name="project_category">
                         <option value="" disabled selected>Kies een categorie</option>
                         @foreach ( $categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}"
+                                    @if ($category->id == $project->category )
+                                        selected="selected"
+                                    @endif
+                                >{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -96,7 +100,7 @@
             </h2>
             <div class="field">
                 <div class="control">
-                    <textarea class="input" name="project_description" placeholder="Mijn uitgebreide epische uitleg over mijn project" value="{{ $project->description }}"></textarea>
+                    <textarea class="input" name="project_description" id='project_description' placeholder="Mijn uitgebreide epische uitleg over mijn project" value="{{ $project->description }}"></textarea>
                 </div>
             </div>
 
@@ -206,9 +210,19 @@
     </div> --}}
     </div>
 
+
+
 <script type="text/javascript">
 
     CKEDITOR.replace( 'project_description' );
+
+    let inhoud = '{{ $project->project_description }}';
+
+    let inhoud2 = inhoud.replace(/&lt;/g, '<');
+    let inhoud3 = inhoud2.replace(/&gt;/g, '>');
+
+    console.log(inhoud3);
+    CKEDITOR.instances.project_description.setData(inhoud3);
 
     let amountOfImages = 1;
     let amountOfPerks = 1;
