@@ -15,7 +15,7 @@ class ProjectsController extends Controller
     public function index()
     {
 
-        $projectsU = Project::all()->where('uitgelicht', '1')->random(2);
+        $projectsU = Project::all()->where('uitgelicht', '1')->where('active', 1)->random(2);
 
 
         foreach($projectsU as $projectU){

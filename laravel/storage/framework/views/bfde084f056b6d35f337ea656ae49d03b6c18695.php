@@ -123,8 +123,18 @@
 
                         </div>
 
-                        <div class="level-left">
+                        <div class="level">
                             <div class="level-left">
+
+
+                                    <div class="control">
+                                        <button type="submit" class="button is-warning">
+                                            Project uitlichten
+                                        </button>
+                                    </div>
+
+                            </div>
+                            <div class="level-right">
                                 <form action="/projects/<?php echo e($project->id); ?>" method="post">
                                     <?php echo csrf_field(); ?>
                                     <?php echo method_field('DELETE'); ?>

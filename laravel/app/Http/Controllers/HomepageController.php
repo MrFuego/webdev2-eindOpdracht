@@ -12,7 +12,7 @@ class HomepageController extends Controller
     public function home()
     {
 
-        $projects = Project::all()->where('uitgelicht', '1')->random(4);
+        $projects = Project::all()->where('uitgelicht', '1')->where('active', 1)->random(4);
 
         $news = News::orderBy('created_at', 'desc')->take(3)->get();
 

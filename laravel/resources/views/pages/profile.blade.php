@@ -120,8 +120,18 @@
 
                         </div>
 
-                        <div class="level-left">
+                        <div class="level">
                             <div class="level-left">
+
+
+                                    <div class="control">
+                                        <button type="submit" class="button is-warning">
+                                            Project uitlichten
+                                        </button>
+                                    </div>
+
+                            </div>
+                            <div class="level-right">
                                 <form action="/projects/{{ $project->id }}" method="post">
                                     @csrf
                                     @method('DELETE')

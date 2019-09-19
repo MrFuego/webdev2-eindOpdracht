@@ -12,7 +12,7 @@
                     <section class="project-info">
                         <h1 class="title is-2 is-spaced"> {{ $projectU->project_name }} </h1>
                         <p class="intro">
-                            {{ $projectU->project_description }}
+                            {{ $projectU->project_intro }}
                         </p>
                         <div class="level">
                             <div class="level-left">

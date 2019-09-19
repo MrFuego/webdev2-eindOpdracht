@@ -9,7 +9,7 @@
     </style>
 
     <div class="column is-full">
-        <h1>Contact pagina</h1>
+        <h1 class="title is-3">Contact us</h1>
     </div>
     <div class="column is-full">
         <?php if(Session::has('notification')): ?>

@@ -10,7 +10,7 @@
                     <section class="project-info">
                         <h1 class="title is-2 is-spaced"> <?php echo e($projectU->project_name); ?> </h1>
                         <p class="intro">
-                            <?php echo e($projectU->project_description); ?>
+                            <?php echo e($projectU->project_intro); ?>
 
                         </p>
                         <div class="level">
